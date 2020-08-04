@@ -1,0 +1,45 @@
+{
+    "name": "xeslint",
+    "version": "0.0.0",
+    "main": "src/index.js",
+    "repository": "git@github.com:LvChengbin/xeslint.git",
+    "author": "LvChengbin <lvchengbin59@gmail.com>",
+    "license": "MIT",
+    "keywords": [
+        "eslint",
+        "local-eslint",
+        "syntastic"
+    ],
+    "files": [
+        "src",
+        "bin"
+    ],
+    "bin": "bin/xeslint.js",
+    "scripts": {
+        "xeslint": "node bin/xeslint.js",
+        "test": "jest",
+        "lint": "eslint src/**/*.js --cache --ignore-path .eslintignore"
+    },
+    "dependencies": {
+        "cosmiconfig": "^7.0.0",
+        "find-up": "^4.1.0",
+        "path-exists": "^4.0.0"
+    },
+    "devDependencies": {
+        "commitizen": "^4.1.2",
+        "cz-conventional-changelog": "^3.2.0",
+        "eslint": "^7.6.0",
+        "husky": "^4.2.5"
+    },
+    "config": {
+        "commitizen": {
+            "path": "cz-conventional-changelog"
+        }
+    },
+    "husky" : {
+        "hooks" : {
+            "pre-commit" : "yarn lint",
+            "pre-push" : "yarn lint"
+        }
+    }
+}
