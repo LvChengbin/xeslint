@@ -49,7 +49,7 @@ function main() {
         } );
 
         if( yarnConfigDir ) {
-            execute( 'yarn', [ 'eslint' ] );
+            execute( 'yarn eslint' );
             return;
         }
 

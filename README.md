@@ -48,6 +48,16 @@ module.exports = {
 }
 ```
 
+or add config item in `package.json` directly:
+
+```json
+{
+    "xeslint" : {
+        "exec" : "yarn lint"
+    }
+}
+```
+
 ### Syntastic Vim
 
 If you are using `yarn 2.x` as your pacakge management tool, `syntastic` won't be able to run `eslint` to check your code style. Install `xeslint` globally and edit the `.vimrc` file:
