@@ -36,10 +36,9 @@
             "path": "cz-conventional-changelog"
         }
     },
-    "husky" : {
-        "hooks" : {
-            "pre-commit" : "yarn lint",
-            "pre-push" : "yarn lint"
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn lint"
         }
     }
 }
