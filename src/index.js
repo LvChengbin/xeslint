@@ -63,7 +63,7 @@ function main() {
                 return;
             }
             packageJsonPath = findUp.sync( 'package.json', {
-                cwd : packageDir
+                cwd : path.dirname( packageDir )
             } );
         }
 
