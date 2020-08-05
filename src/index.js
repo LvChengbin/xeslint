@@ -42,7 +42,8 @@ function main() {
         }
     } else {
         /**
-         * arn berry
+         * yarn berry
+         * execute eslint with yarn command
          */
         const yarnConfigDir = findUp.sync( '.yarn', {
             type : 'directory'
@@ -55,6 +56,9 @@ function main() {
 
         let packageJsonPath = findUp.sync( 'package.json' );
 
+        /**
+         * try looking for a node_modules directory which has .bin/eslint in it.
+         */
         while( packageJsonPath ) {
             const packageDir = path.dirname( packageJsonPath );
             const eslintPath = path.join( packageDir, 'node_moduels', '.bin', 'eslint' );
