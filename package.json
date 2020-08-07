@@ -1,7 +1,7 @@
 {
     "name": "xeslint",
     "version": "0.0.2",
-    "main": "src/index.js",
+    "main": "dist/index.js",
     "repository": "git@github.com:LvChengbin/xeslint.git",
     "author": "LvChengbin <lvchengbin59@gmail.com>",
     "license": "MIT",
@@ -11,12 +11,14 @@
         "syntastic"
     ],
     "files": [
-        "src",
+        "dist",
         "bin"
     ],
     "bin": "bin/xeslint.js",
     "scripts": {
-        "xeslint": "node bin/xeslint.js",
+        "build": "tsc --declaration",
+        "build:watch": "tsc --watch",
+        "xeslint": "ts-node bin/xeslint.js",
         "test": "jest",
         "lint": "eslint src/**/*.js --cache --ignore-path .eslintignore"
     },
@@ -26,10 +28,16 @@
         "path-exists": "^4.0.0"
     },
     "devDependencies": {
+        "@types/eslint": "^7.2.0",
+        "@types/node": "^14.0.27",
+        "@typescript-eslint/eslint-plugin": "^3.8.0",
+        "@typescript-eslint/parser": "^3.8.0",
         "commitizen": "^4.1.2",
         "cz-conventional-changelog": "^3.2.0",
         "eslint": "^7.6.0",
-        "husky": "^4.2.5"
+        "husky": "^4.2.5",
+        "ts-node": "^8.10.2",
+        "typescript": "^3.9.7"
     },
     "config": {
         "commitizen": {
