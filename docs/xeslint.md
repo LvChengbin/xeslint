@@ -25,17 +25,24 @@ Start((xeslint)) --> LoadConfig(Load $HOME/.xeslintrc)
         IsEnd --> |N| GoToParentDir(Go to parent directory)
         -->LookForLocalEslint
     end
-
-    TypeIsGlobalEslint --> loadDaemonFile(Load $HOME/.xeslint/daemons)
-    --> CheckDaemonExists{Daemon Exists}
+    
+    SetTypeIsLocalEslint --> loadDaemonFile
+    SetTypeIsYarn --> loadDaemonFile
+    SetTypeIsGlobalEslint --> loadDaemonFile(Load $HOME/.xeslint/daemons)
+    --> LoadRCFile(Load .xeslintrc file)
+    --> CheckDaemonExists{Daemon exists}
     --> |Y| Request(Request to daemon server)
-    CheckDaemonExists --> |N| CreateDaemon(Create daemon server ) --> Request
+    CheckDaemonExists --> |N| CreateDeamonServerIfTypeIsYarn
 
     subgraph Create deamon server
-        TypeIsYarn{If type is yarn}
+        CreateDeamonServerIfTypeIsYarn{If type is yarn}
         --> |Y| StartServerWithYarn(Start server with yarn)
-        --> |N| StartServerWithNode(Start server with node)
+        CreateDeamonServerIfTypeIsYarn --> |N| StartServerWithNode(Start server with node)
+        StartServerWithYarn --> SaveDeamonServerInfo(Save deamon info in $HOME/.xeslint/deamons)
+        StartServerWithNode --> SaveDeamonServerInfo
     end
+        
+    SaveDeamonServerInfo --> Request
 
     Request --> GetResponse(Get response from daemon server)
 ```
