@@ -30,6 +30,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     ],
     "fallbackPool": [
       [
+        "@types/debug",
+        "npm:4.1.5"
+      ],
+      [
         "@types/eslint",
         "npm:7.2.0"
       ],
@@ -58,6 +62,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:3.2.0"
       ],
       [
+        "debug",
+        "virtual:6d660ac5dcc05bf3fa1ce85a78fd529c901c0a6532eeec3ceb4ce7988704d9f30d75c8fc90c41cf250e93577362ec1ba377ab986ae26ad0338aee82446be4bdc#npm:4.2.0"
+      ],
+      [
+        "deepmerge",
+        "npm:4.2.2"
+      ],
+      [
         "eslint",
         "npm:7.6.0"
       ],
@@ -74,12 +86,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:4.0.0"
       ],
       [
+        "supports-color",
+        "npm:7.1.0"
+      ],
+      [
         "ts-node",
         "virtual:6d660ac5dcc05bf3fa1ce85a78fd529c901c0a6532eeec3ceb4ce7988704d9f30d75c8fc90c41cf250e93577362ec1ba377ab986ae26ad0338aee82446be4bdc#npm:8.10.2"
       ],
       [
         "typescript",
         "patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=5b02a2"
+      ],
+      [
+        "yaml",
+        "npm:1.10.0"
       ]
     ],
     "locationBlacklistData": [
@@ -89,6 +109,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {
           "packageLocation": "./",
           "packageDependencies": [
+            ["@types/debug", "npm:4.1.5"],
             ["@types/eslint", "npm:7.2.0"],
             ["@types/node", "npm:14.0.27"],
             ["@typescript-eslint/eslint-plugin", "virtual:6d660ac5dcc05bf3fa1ce85a78fd529c901c0a6532eeec3ceb4ce7988704d9f30d75c8fc90c41cf250e93577362ec1ba377ab986ae26ad0338aee82446be4bdc#npm:3.8.0"],
@@ -96,12 +117,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["commitizen", "npm:4.1.2"],
             ["cosmiconfig", "npm:7.0.0"],
             ["cz-conventional-changelog", "npm:3.2.0"],
+            ["debug", "virtual:6d660ac5dcc05bf3fa1ce85a78fd529c901c0a6532eeec3ceb4ce7988704d9f30d75c8fc90c41cf250e93577362ec1ba377ab986ae26ad0338aee82446be4bdc#npm:4.2.0"],
+            ["deepmerge", "npm:4.2.2"],
             ["eslint", "npm:7.6.0"],
             ["find-up", "npm:4.1.0"],
             ["husky", "npm:4.2.5"],
             ["path-exists", "npm:4.0.0"],
+            ["supports-color", "npm:7.1.0"],
             ["ts-node", "virtual:6d660ac5dcc05bf3fa1ce85a78fd529c901c0a6532eeec3ceb4ce7988704d9f30d75c8fc90c41cf250e93577362ec1ba377ab986ae26ad0338aee82446be4bdc#npm:8.10.2"],
-            ["typescript", "patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=5b02a2"]
+            ["typescript", "patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=5b02a2"],
+            ["yaml", "npm:1.10.0"]
           ],
           "linkType": "SOFT",
         }]
@@ -189,6 +214,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-color-name-npm-1.1.1-00b0925070-8311db94a9.zip/node_modules/@types/color-name/",
           "packageDependencies": [
             ["@types/color-name", "npm:1.1.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/debug", [
+        ["npm:4.1.5", {
+          "packageLocation": "./.yarn/cache/@types-debug-npm-4.1.5-3464d6c971-416ad24bc5.zip/node_modules/@types/debug/",
+          "packageDependencies": [
+            ["@types/debug", "npm:4.1.5"]
           ],
           "linkType": "HARD",
         }]
@@ -908,6 +942,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "supports-color"
           ],
           "linkType": "HARD",
+        }],
+        ["virtual:6d660ac5dcc05bf3fa1ce85a78fd529c901c0a6532eeec3ceb4ce7988704d9f30d75c8fc90c41cf250e93577362ec1ba377ab986ae26ad0338aee82446be4bdc#npm:4.2.0", {
+          "packageLocation": "./.yarn/$$virtual/debug-virtual-297af3b245/0/cache/debug-npm-4.2.0-9392baba7e-dcfb8ede26.zip/node_modules/debug/",
+          "packageDependencies": [
+            ["debug", "virtual:6d660ac5dcc05bf3fa1ce85a78fd529c901c0a6532eeec3ceb4ce7988704d9f30d75c8fc90c41cf250e93577362ec1ba377ab986ae26ad0338aee82446be4bdc#npm:4.2.0"],
+            ["ms", "npm:2.1.2"],
+            ["supports-color", "npm:7.1.0"]
+          ],
+          "packagePeers": [
+            "supports-color"
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["decode-uri-component", [
@@ -933,6 +979,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/deep-is-npm-0.1.3-0941784645-3de58f86af.zip/node_modules/deep-is/",
           "packageDependencies": [
             ["deep-is", "npm:0.1.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["deepmerge", [
+        ["npm:4.2.2", {
+          "packageLocation": "./.yarn/cache/deepmerge-npm-4.2.2-112165ced2-85abf8e004.zip/node_modules/deepmerge/",
+          "packageDependencies": [
+            ["deepmerge", "npm:4.2.2"]
           ],
           "linkType": "HARD",
         }]
@@ -3207,6 +3262,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["xeslint", "workspace:."],
+            ["@types/debug", "npm:4.1.5"],
             ["@types/eslint", "npm:7.2.0"],
             ["@types/node", "npm:14.0.27"],
             ["@typescript-eslint/eslint-plugin", "virtual:6d660ac5dcc05bf3fa1ce85a78fd529c901c0a6532eeec3ceb4ce7988704d9f30d75c8fc90c41cf250e93577362ec1ba377ab986ae26ad0338aee82446be4bdc#npm:3.8.0"],
@@ -3214,12 +3270,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["commitizen", "npm:4.1.2"],
             ["cosmiconfig", "npm:7.0.0"],
             ["cz-conventional-changelog", "npm:3.2.0"],
+            ["debug", "virtual:6d660ac5dcc05bf3fa1ce85a78fd529c901c0a6532eeec3ceb4ce7988704d9f30d75c8fc90c41cf250e93577362ec1ba377ab986ae26ad0338aee82446be4bdc#npm:4.2.0"],
+            ["deepmerge", "npm:4.2.2"],
             ["eslint", "npm:7.6.0"],
             ["find-up", "npm:4.1.0"],
             ["husky", "npm:4.2.5"],
             ["path-exists", "npm:4.0.0"],
+            ["supports-color", "npm:7.1.0"],
             ["ts-node", "virtual:6d660ac5dcc05bf3fa1ce85a78fd529c901c0a6532eeec3ceb4ce7988704d9f30d75c8fc90c41cf250e93577362ec1ba377ab986ae26ad0338aee82446be4bdc#npm:8.10.2"],
-            ["typescript", "patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=5b02a2"]
+            ["typescript", "patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=5b02a2"],
+            ["yaml", "npm:1.10.0"]
           ],
           "linkType": "SOFT",
         }]

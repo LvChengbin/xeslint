@@ -80,6 +80,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/debug@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "@types/debug@npm:4.1.5"
+  checksum: 416ad24bc589be0fb8c78bea972aa7d4ffdf6b136239701b1792674463b2dbf8c6707f6055ec484f79ec1f2b528ffef90c87e55df7e4a0f458184cad5bf0cfc8
+  languageName: node
+  linkType: hard
+
 "@types/eslint-visitor-keys@npm:^1.0.0":
   version: 1.0.0
   resolution: "@types/eslint-visitor-keys@npm:1.0.0"
@@ -717,6 +724,13 @@ __metadata:
   version: 0.1.3
   resolution: "deep-is@npm:0.1.3"
   checksum: 3de58f86af4dec86c8be531a5abaf2e6d8ea98fa2f1d81a3a778d0d8df920ee282043a6ef05bfb4eb699c8551df9ac1b808d4dc71d54cc40ab1efa5ce8792943
+  languageName: node
+  linkType: hard
+
+"deepmerge@npm:^4.2.2":
+  version: 4.2.2
+  resolution: "deepmerge@npm:4.2.2"
+  checksum: 85abf8e0045ee280996e7d2396979c877ef0741e413b716e42441110e0a83ac08098b2a49cea035510060bf667c0eae3189b2a52349f5fa4b000c211041637b1
   languageName: node
   linkType: hard
 
@@ -2743,6 +2757,7 @@ typescript@^3.9.7:
   version: 0.0.0-use.local
   resolution: "xeslint@workspace:."
   dependencies:
+    "@types/debug": ^4.1.5
     "@types/eslint": ^7.2.0
     "@types/node": ^14.0.27
     "@typescript-eslint/eslint-plugin": ^3.8.0
@@ -2750,12 +2765,16 @@ typescript@^3.9.7:
     commitizen: ^4.1.2
     cosmiconfig: ^7.0.0
     cz-conventional-changelog: ^3.2.0
+    debug: ^4.1.1
+    deepmerge: ^4.2.2
     eslint: ^7.6.0
     find-up: ^4.1.0
     husky: ^4.2.5
     path-exists: ^4.0.0
+    supports-color: ^7.1.0
     ts-node: ^8.10.2
     typescript: ^3.9.7
+    yaml: ^1.10.0
   bin:
     xeslint: bin/xeslint.js
   languageName: unknown
