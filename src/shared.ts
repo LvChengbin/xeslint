@@ -10,6 +10,7 @@
 import fs from 'fs';
 import util from 'util';
 import path from 'path'
+import yaml from 'yaml';
 import debug from 'debug';
 import findUp from 'find-up';
 import pathExists from 'path-exists';
@@ -20,10 +21,12 @@ const CONFIGDIR = path.join( HOME as string, '.xeslint' );
 
 const mkdir = util.promisify( fs.mkdir );
 const writeFile = util.promisify( fs.writeFile );
+const readFile = util.promisify( fs.readFile );
 
 const initXeslintDebug = debug( 'Init' );
 const rcDebug = debug( 'Load RC' );
 const findEslintDebug = debug( 'Find eslint' );
+const findExistsDeamonDebug = debug( 'Find exists deamon' );
 
 export async function initXeslint(): Promise<any> {
     /**
@@ -88,6 +91,9 @@ export async function findEslint( cwd = process.cwd() ): Promise<any> {
 
     const result: Record<string, any> = {};
 
+    /**
+     * Look for the directory has node_modules or .yarn init.
+     */
     const target = [ 'node_modules', '.yarn' ];
 
     let cursor = findUp.sync( [ 'node_modules', '.yarn' ], {
@@ -130,8 +136,38 @@ export async function findEslint( cwd = process.cwd() ): Promise<any> {
     return result;
 }
 
+export async function findExistsDeamon( options: Record<string, any> ): Promise<any | null> {
+    try {
+        const buf = await readFile( path.join( CONFIGDIR, 'deamons.yml' ) );
+        const text = buf.toString();
+
+        if( !text ) {
+            findExistsDeamonDebug( 'No deamon exists.' );
+            return null;
+        }
+
+        const list = yaml.parse( text );
+
+        for( const deamon of list ) {
+            let match = true;
+            for( const key of Object.keys( options ) ) {
+                if( options[ key ] !== deamon[ key ] ) {
+                    match = false;
+                    break;
+                }
+            }
+            return match ? deamon : null;
+        }
+
+    } catch( e ) {
+        findExistsDeamonDebug( e );
+        return null;
+    }
+}
+
 ( async () => {
     await initXeslint();
     await rc();
     await findEslint();
+    await findExistsDeamon( {} );
 } )();
