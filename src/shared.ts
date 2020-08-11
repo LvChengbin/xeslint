@@ -10,6 +10,7 @@
 import fs from 'fs';
 import util from 'util';
 import path from 'path'
+import crypto from 'crypto';
 import { spawnSync } from 'child_process';
 import yaml from 'yaml';
 import debug from 'debug';
@@ -19,15 +20,15 @@ import { cosmiconfigSync } from 'cosmiconfig';
 
 const HOME = process.env[ process.platform === 'win32' ? 'USERPROFILE' : 'HOME' ];
 const CONFIGDIR = path.join( HOME as string, '.xeslint' );
+const DAEMONSDIR = path.join( CONFIGDIR, 'daemons' );
 
 const mkdir = util.promisify( fs.mkdir );
 const writeFile = util.promisify( fs.writeFile );
-const readFile = util.promisify( fs.readFile );
 
 const initXeslintDebug = debug( 'Init' );
 const rcDebug = debug( 'Load RC' );
 const findEslintDebug = debug( 'Find eslint' );
-const findExistsDeamonDebug = debug( 'Find exists deamon' );
+const findExistsDaemonDebug = debug( 'Find exists daemon' );
 
 export async function initXeslint(): Promise<any> {
     /**
@@ -41,14 +42,14 @@ export async function initXeslint(): Promise<any> {
     }
 
     /**
-     * create $HOME/.xeslint/deamons.json if not exists.
+     * create $HOME/.xeslint/daemons.json if not exists.
      */
-    const deamonsFile = path.join( CONFIGDIR, 'deamons.yml' );
+    const daemonsFile = path.join( CONFIGDIR, 'daemons.yml' );
     try {
-        await writeFile( deamonsFile, '', { flag : 'wx' } );
-        initXeslintDebug( `Created ${deamonsFile}` );
+        await writeFile( daemonsFile, '', { flag : 'wx' } );
+        initXeslintDebug( `Created ${daemonsFile}` );
     } catch( e ) {
-        initXeslintDebug( `Failed to create file ${deamonsFile}.` )
+        initXeslintDebug( `Failed to create file ${daemonsFile}.` )
         initXeslintDebug( e.message );
     }
 }
@@ -137,36 +138,18 @@ export async function findEslint( cwd = process.cwd() ): Promise<any> {
     return result;
 }
 
-export async function findExistsDeamon( options: Record<string, any> ): Promise<any | null> {
+export async function findExistsDaemon( options: Record<string, any> ): Promise<any | null> {
+    const md5 = crypto.createHash( 'md5' ).update( JSON.stringify( options ) ).digest( 'hex' );
+
     try {
-        const buf = await readFile( path.join( CONFIGDIR, 'deamons.yml' ) );
-        const text = buf.toString();
+        const text = fs.readFileSync( path.join( DAEMONSDIR, md5 ) ).toString();
+        const info = yaml.parse( text );
 
-        if( !text ) {
-            findExistsDeamonDebug( 'No deamon exists.' );
-            return null;
-        }
-
-        const list = yaml.parse( text );
-
-        for( const deamon of list ) {
-            let match = true;
-            for( const key of Object.keys( options ) ) {
-                if( options[ key ] !== deamon[ key ] ) {
-                    match = false;
-                    break;
-                }
-            }
-            if( match ) {
-                findExistsDeamonDebug( 'Find match exists deamon' );
-                findExistsDeamonDebug( deamon );
-                return deamon;
-            }
-            return null;
-        }
-
+        findExistsDaemonDebug( `Find match exists daemon: ${md5}` );
+        findExistsDaemonDebug( info );
+        return info;
     } catch( e ) {
-        findExistsDeamonDebug( e );
+        findExistsDaemonDebug( 'No matched daemon.' );
         return null;
     }
 }
@@ -191,5 +174,5 @@ export async function runCommand( command: string, args = [], options = {} ): Pr
     await initXeslint();
     await rc();
     await findEslint();
-    await findExistsDeamon( {} );
+    await findExistsDaemon( {} );
 } )();

@@ -11,14 +11,21 @@ import net from 'net';
 import output from './output';
 
 export type SendOptions = {
-    args : string[];
-    cwd : string;
+    port: number;
+    host?: string;
+    args: string[];
+    cwd?: string;
 }
 
-export const send = ( options: SendOptions = {} ) => {
+export const send = ( options: SendOptions = {} ): void => {
 
-    const socket = net.connect( 7896, '127.0.0.1', () => {
+    options = {
+        host : '127.0.0.1',
+        cwd : process.cwd(),
+        ...options
+    };
 
+    const socket = net.connect( options.port, options.host, () => {
         let data = '';
 
         socket.on( 'data', chunk => {
@@ -31,5 +38,4 @@ export const send = ( options: SendOptions = {} ) => {
 
         socket.end( 'xxxx' );
     } );
-
 }
