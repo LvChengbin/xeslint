@@ -10,6 +10,7 @@
 import fs from 'fs';
 import util from 'util';
 import path from 'path'
+import { spawnSync } from 'child_process';
 import yaml from 'yaml';
 import debug from 'debug';
 import findUp from 'find-up';
@@ -156,13 +157,34 @@ export async function findExistsDeamon( options: Record<string, any> ): Promise<
                     break;
                 }
             }
-            return match ? deamon : null;
+            if( match ) {
+                findExistsDeamonDebug( 'Find match exists deamon' );
+                findExistsDeamonDebug( deamon );
+                return deamon;
+            }
+            return null;
         }
 
     } catch( e ) {
         findExistsDeamonDebug( e );
         return null;
     }
+}
+
+export async function runCommand( command: string, args = [], options = {} ): Promise<any> {
+    const [ exec, ...xargs ] = command.split( /\s+/ );
+
+    options = {
+        cwd : process.cwd,
+        env : process.env,
+        stdio : [ 'ignore', 'inherit', 'inherit' ],
+        encoding : 'utf-8',
+        ...options
+    };
+
+    const run = spawnSync( exec, [ ...xargs, ...args ], options );
+
+    return run;
 }
 
 ( async () => {
