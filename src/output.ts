@@ -10,3 +10,5 @@
 export const write = ( message: string ): void => {
     process.stdout.write( message );
 }
+
+export default { write };

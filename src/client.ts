@@ -17,7 +17,7 @@ export type SendOptions = {
     cwd?: string;
 }
 
-export const send = ( options: SendOptions = {} ): void => {
+export const send = ( options: SendOptions ): void => {
 
     options = {
         host : '127.0.0.1',
@@ -36,6 +36,9 @@ export const send = ( options: SendOptions = {} ): void => {
             output.write( data );
         } );
 
-        socket.end( 'xxxx' );
+        socket.end( JSON.stringify( {
+        } ) );
     } );
 }
+
+export default { send };

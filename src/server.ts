@@ -71,6 +71,14 @@ export function start( options: ServerOptions ): void {
             mtime : +new Date
         };
 
+        if( process.send ) {
+            console.log( 'IPC is enabled' );
+        } else {
+            console.log( 'IPC is not enabled' );
+        }
+        process.send?.( ( process.versions as any ).pnp );
+        process.disconnect?.();
+
         fs.writeFileSync( options.daemonFile, yaml.stringify( daemon ) ); 
     } );
 

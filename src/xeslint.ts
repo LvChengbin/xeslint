@@ -11,5 +11,6 @@ import client from './client';
 
 client.send( {
     args : process.argv.slice( 2 ),
-    cwd : process.cwd()
+    cwd : process.cwd(),
+    port : 4387
 } );
