@@ -10,17 +10,12 @@
 import { spawn } from 'child_process';
 
 function launch() {
-    console.log( '-----------' );
     const daemon = require.resolve( './daemon' );
     const child = spawn( 'yarn', [ 'node', daemon ], {
         detached : true,
         env : { ...process.env },
-        stdio : [ 'inherit', 'inherit', 'inherit', 'ipc' ]
+        stdio : 'ignore' 
     } );
-
-    child.on( 'message', ( ...args ) => {
-        console.log( 'c-------mmmmmmmm-----', args );
-    } )
 
     child.unref();
 }
